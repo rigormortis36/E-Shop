@@ -13,7 +13,8 @@ namespace EntityLayer.Entities
         public int Id { get; set; }
 
         [Display(Name = "Ürün")]
-        public int UrunId { get; set; }
+        public int ProductID { get; set; }
+        public virtual Product Product { get; set; }
 
         [Display(Name = "Adet")]
         public int Quantity { get; set; }
@@ -29,6 +30,8 @@ namespace EntityLayer.Entities
 
         [Display(Name = "Kullanıcı")]
         public int UserId { get; set; }
+
+        public virtual User User { get; set; }
 
 
     }
