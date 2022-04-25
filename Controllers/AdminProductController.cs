@@ -20,7 +20,7 @@ namespace E_Shop.Controllers
         DataContext db = new DataContext();
         public ActionResult Index(int sayfa=1)
         {
-            return View(productRepository.List().ToPagedList(sayfa,3));
+            return View(productRepository.List().ToPagedList(sayfa,5));
         }
 
         public ActionResult Create()
@@ -108,6 +108,32 @@ namespace E_Shop.Controllers
             }
             ModelState.AddModelError("", "Ups! Bir Hata Oluştu");
             return View(update);
+        }
+        public ActionResult CriticalStock()
+        {
+            var kritik = db.Products.Where(x => x.Stock <= 50).ToList();
+
+            return View(kritik);
+        }
+
+        public PartialViewResult StockCount()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var count = db.Products.Where(x => x.Stock < 50).Count();
+                ViewBag.count = count;
+                var azalan = db.Products.Where(x => x.Stock == 50).Count();
+                ViewBag.azalan = azalan;
+
+            }
+            return PartialView();
+
+        }
+        public PartialViewResult StokYellow()
+        {
+            var kritik = db.Products.Where(x => x.Stock == 50).ToList();
+
+            return PartialView(kritik);
         }
     }
 }

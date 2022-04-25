@@ -15,5 +15,11 @@ namespace E_Shop.Controllers
         {
             return PartialView(categoryRepository.List()); ;
         }
+
+        public ActionResult Details(int id)
+        {
+            var cat = categoryRepository.CategoryDetails(id);
+            return View(cat);
+        }
     }
 }

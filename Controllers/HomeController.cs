@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using System.Web.Security;
 
 namespace E_Shop.Controllers
 {
@@ -14,7 +15,8 @@ namespace E_Shop.Controllers
         ProductRepository productRepository = new ProductRepository();
         public ActionResult Index(int sayfa=1)
         {
-            return View(productRepository.List().ToPagedList(sayfa,3));
+            return View(productRepository.List().ToPagedList(sayfa,5));
         }
+       
     }
 }
